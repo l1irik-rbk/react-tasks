@@ -1,8 +1,12 @@
 import React from 'react';
 
-class Errorpage extends React.Component {
+class Errorpage extends React.Component<object, object> {
   render() {
-    return <div>Error 404</div>;
+    return (
+      <section className="error-page">
+        <h1 className="main-title">Error 404</h1>
+      </section>
+    );
   }
 }
 

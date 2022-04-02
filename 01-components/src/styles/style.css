@@ -1,0 +1,16 @@
+.header {
+  margin-bottom: 15px;
+}
+
+.main-title {
+  margin-bottom: 10px;
+}
+
+.search{
+  max-width: 400px;
+}
+
+.house-image{
+  max-height: 254px;
+  object-fit: cover;
+}

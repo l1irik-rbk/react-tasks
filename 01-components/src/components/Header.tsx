@@ -1,15 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-class Header extends React.Component {
+class Header extends React.Component<object, object> {
   render() {
     return (
-      <>
-        <header>
-          <Link to="/">Home</Link>
-          <Link to="/AboutUs">About Us</Link>
-        </header>
-      </>
+      <header className="header">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid">
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div className="navbar-nav">
+                <NavLink className="nav-link" to="/">
+                  Home
+                </NavLink>
+                <NavLink className="nav-link" to="/AboutUs">
+                  About Us
+                </NavLink>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
     );
   }
 }
