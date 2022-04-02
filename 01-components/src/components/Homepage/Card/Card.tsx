@@ -1,12 +1,12 @@
 import React from 'react';
-import { IHouse } from '../helpers/TypeScript/interfaces';
+import { IHouse } from '../../../helpers/TypeScript/interfaces';
 
 class Card extends React.Component<{ house: IHouse }> {
   render() {
     const { houseName, description, price, date, src } = this.props.house;
 
     return (
-      <div className="col">
+      <div className="col" data-testid="house">
         <div className="card h-100 shadow p-3 mb-5 bg-white rounded">
           <img src={src} className="card-img-top house-image" alt="house" />
           <div className="card-body">

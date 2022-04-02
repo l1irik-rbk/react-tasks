@@ -6,3 +6,7 @@ export interface IHouse {
   src: string;
   id: number;
 }
+
+export interface fakeStore {
+  [key: string]: string;
+}

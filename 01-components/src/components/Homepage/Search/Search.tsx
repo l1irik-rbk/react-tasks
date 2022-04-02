@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchButton from './SearchButtom';
+import SearchButton from '../SearchButton/SearchButton';
 
 class Search extends React.Component<object, { inputValue: string }> {
   state = {
