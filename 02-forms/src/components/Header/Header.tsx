@@ -15,6 +15,9 @@ class Header extends React.Component<object, object> {
                 <NavLink className="nav-link" to="/AboutUs" data-testid="about-link">
                   About Us
                 </NavLink>
+                <NavLink className="nav-link" to="/Form" data-testid="form-link">
+                  Form
+                </NavLink>
               </div>
             </div>
           </div>
