@@ -1,7 +1,8 @@
 import React from 'react';
 import { IHouse } from '../../../helpers/TypeScript/interfaces';
+import { CardProp } from '../../../helpers/TypeScript/types';
 
-class Card extends React.Component<{ house: IHouse }> {
+class Card extends React.Component<CardProp> {
   render() {
     const { houseName, description, price, date, src } = this.props.house;
 

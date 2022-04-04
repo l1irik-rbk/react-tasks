@@ -10,3 +10,14 @@ export interface IHouse {
 export interface fakeStore {
   [key: string]: string;
 }
+
+export interface newCard {
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  country: string;
+  notification: boolean;
+  picture?: string;
+  accept: boolean;
+  id: number;
+}
