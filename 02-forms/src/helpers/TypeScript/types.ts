@@ -1,4 +1,4 @@
-import { IHouse, newCard } from './interfaces';
+import { IHouse, newCard, Errors } from './interfaces';
 
 export type HomepageState = {
   houses: IHouse[];
@@ -18,4 +18,14 @@ export type CardProp = {
 
 export type NewCardProp = {
   card: newCard;
+};
+
+export type FormState = {
+  errors: Errors;
+  disabledButton?: boolean;
+  submitButtonClicks: number;
+};
+
+export type ValidationErrorProps = {
+  errorMessage: string;
 };

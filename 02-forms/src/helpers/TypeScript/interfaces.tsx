@@ -21,3 +21,12 @@ export interface newCard {
   accept: boolean;
   id: number;
 }
+
+export interface Errors {
+  acceptError?: boolean;
+  firstNameError?: boolean;
+  lastNameError?: boolean;
+  countryError?: boolean;
+  pictureError?: boolean;
+  birthdayError?: boolean;
+}

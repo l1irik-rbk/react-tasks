@@ -56,3 +56,16 @@ export const HOUSES: IHouse[] = [
     id: 6,
   },
 ];
+
+export const MIN_LENGTH_OF_NAME = 3;
+
+export const ERROR_MESSAGES = {
+  acceptError: 'This checkbox should be cecked',
+  firstNameError: 'First name does not match the input conditions',
+  lastNameError: 'Last name does not match the input conditions',
+  countryError: 'You should select your country of residence',
+  pictureError: 'You should add profile picture',
+  birthdayError: 'You should choose correct date',
+};
+
+export const REG_EXP = /^([а-яё]+|[a-z]+)$/i;

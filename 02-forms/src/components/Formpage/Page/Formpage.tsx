@@ -19,7 +19,6 @@ class Formpage extends React.Component<FormpageProps, FormpageState> {
   };
 
   render() {
-    console.log(this.state);
     return (
       <section className="form-section">
         <h1 className="main-title">Information about you</h1>
