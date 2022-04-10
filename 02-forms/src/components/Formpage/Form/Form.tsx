@@ -160,7 +160,7 @@ class Form extends React.Component<FormpageProps, FormState> {
 
   render() {
     const errors = this.state.errors;
-    console.log(this.state);
+
     return (
       <form ref={this.formRef} onSubmit={this.handleSubmit}>
         <div className="mb-3 input-group">
@@ -172,6 +172,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             className="form-control"
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="firstName"
           />
           <input
             ref={this.lastNameRef}
@@ -180,6 +181,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             className="form-control"
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="lastName"
           />
         </div>
         {errors.firstNameError ? (
@@ -199,6 +201,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             name="date"
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="birthday"
           />
         </div>
         {errors.birthdayError ? (
@@ -212,6 +215,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             defaultValue={'DEFAULT'}
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="country"
           >
             <option value={'DEFAULT'} disabled>
               Choose your country
@@ -236,6 +240,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             id="formFile"
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="picture"
           />
         </div>
         {errors.pictureError ? (
@@ -262,6 +267,7 @@ class Form extends React.Component<FormpageProps, FormState> {
             id="check"
             onChange={this.selectInput}
             onBlur={this.checkErrors}
+            data-testid="accept"
           />
           <label className="form-check-label" htmlFor="check">
             I agree to the processing of personal data
