@@ -1,8 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TEST_CARD } from '../../../helpers/constants';
-import NewCard from '../NewCard/NewCard';
-import Formpage from '../Page/Formpage';
 import Form from './Form';
 
 describe('Form component', () => {

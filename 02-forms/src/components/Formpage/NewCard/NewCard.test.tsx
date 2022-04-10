@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { TEST_CARD } from '../../../helpers/constants';
-import { newCard } from '../../../helpers/TypeScript/interfaces';
 import NewCard from './NewCard';
 
 test('Card state test', () => {
