@@ -1,27 +1,34 @@
 import React from 'react';
-import { IHouse } from '../../../helpers/TypeScript/interfaces';
 import { CardProp } from '../../../helpers/TypeScript/types';
 
 class Card extends React.Component<CardProp> {
   render() {
-    const { houseName, description, price, date, src } = this.props.house;
+    const { name, birth_year: birthYear, mass, height, gender } = this.props.person;
 
     return (
       <div className="col" data-testid="house">
-        <div className="card h-100 shadow p-3 mb-5 bg-white rounded">
-          <img src={src} className="card-img-top house-image" alt="house" />
+        <div className="card shadow p-3 mb-5 bg-white rounded">
           <div className="card-body">
-            <h5 className="card-title">{houseName}</h5>
-            <h6>
-              <small>
-                <span style={{ color: 'red' }}>{price}$</span> a night
-              </small>
-            </h6>
-            <p className="card-text">{description}</p>
+            <h5 className="card-title person-name">{name}</h5>
+            <ul>
+              <li>
+                <span className="prefics">Birth year:</span> {birthYear}
+              </li>
+              <li>
+                <span className="prefics">Height:</span> {height}sm
+              </li>
+              <li>
+                <span className="prefics">Mass:</span> {mass}kg
+              </li>
+
+              <li>
+                <span className="prefics">Gender:</span> {gender}
+              </li>
+            </ul>
           </div>
-          <div className="card-footer">
-            <small className="text-muted">Free dates: {date}</small>
-          </div>
+          {/* <div className="card-footer">
+            <small className="text-muted">Birth year: {birthYear}</small>
+          </div> */}
         </div>
       </div>
     );

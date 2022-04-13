@@ -1,15 +1,15 @@
 import React from 'react';
-import { IHouse } from '../../../helpers/TypeScript/interfaces';
+import { CardListProp } from '../../../helpers/TypeScript/types';
 import Card from '../Card/Card';
 
-class CardsList extends React.Component<{ houses: IHouse[] }, object> {
+class CardsList extends React.Component<CardListProp, object> {
   render() {
-    const houses = this.props.houses;
+    const people = this.props.people;
 
     return (
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {houses.map((house) => {
-          return <Card key={house.id} house={house} />;
+        {people.map((person) => {
+          return <Card key={person.name} person={person} />;
         })}
       </div>
     );

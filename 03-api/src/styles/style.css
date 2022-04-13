@@ -1,3 +1,7 @@
+li {
+  list-style: none;
+}
+
 .header {
   margin-bottom: 15px;
 }
@@ -33,4 +37,20 @@ form{
   max-height: 400px;
   background-size: cover;
   object-fit: cover;
+}
+
+.person-name{
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.prefics{
+  color: red;
+}
+
+.not-found-title{
+  text-align: center;
+  margin-top: 60px;
+  font-size: 30px;
 }

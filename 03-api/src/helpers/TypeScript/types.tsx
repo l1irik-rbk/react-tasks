@@ -1,7 +1,11 @@
-import { IHouse, newCard, Errors } from './interfaces';
+import { IPerson, newCard, Errors } from './interfaces';
 
 export type HomepageState = {
-  houses: IHouse[];
+  people: IPerson[];
+  searchValue: string;
+  isLoaded: boolean;
+  disabled: boolean;
+  personNotFound: boolean;
 };
 
 export type FormpageState = {
@@ -13,7 +17,7 @@ export type FormpageProps = {
 };
 
 export type CardProp = {
-  house: IHouse;
+  person: IPerson;
 };
 
 export type NewCardProp = {
@@ -28,4 +32,13 @@ export type FormState = {
 
 export type ValidationErrorProps = {
   errorMessage: string;
+};
+
+export type CardListProp = {
+  people: IPerson[];
+};
+
+export type SearchProp = {
+  onInputChange: (value: string) => void;
+  searchValue: string;
 };
