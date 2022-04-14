@@ -4,12 +4,12 @@ import Card from '../Card/Card';
 
 class CardsList extends React.Component<CardListProp, object> {
   render() {
-    const people = this.props.people;
+    const { people, showModalWindow } = this.props;
 
     return (
       <div className="row row-cols-1 row-cols-md-3 g-4">
         {people.map((person) => {
-          return <Card key={person.name} person={person} />;
+          return <Card key={person.name} person={person} showModalWindow={showModalWindow} />;
         })}
       </div>
     );

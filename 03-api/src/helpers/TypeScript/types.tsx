@@ -6,6 +6,8 @@ export type HomepageState = {
   isLoaded: boolean;
   disabled: boolean;
   personNotFound: boolean;
+  modalWindowActive: boolean;
+  madalWindowPerson: null | IPerson;
 };
 
 export type FormpageState = {
@@ -18,6 +20,7 @@ export type FormpageProps = {
 
 export type CardProp = {
   person: IPerson;
+  showModalWindow: (person: IPerson) => void;
 };
 
 export type NewCardProp = {
@@ -36,9 +39,15 @@ export type ValidationErrorProps = {
 
 export type CardListProp = {
   people: IPerson[];
+  showModalWindow: (person: IPerson) => void;
 };
 
 export type SearchProp = {
   onInputChange: (value: string) => void;
   searchValue: string;
+};
+
+export type ModalWindowProp = {
+  closeModalWindow: () => void;
+  person: IPerson | null;
 };

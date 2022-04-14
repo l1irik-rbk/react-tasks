@@ -54,3 +54,37 @@ form{
   margin-top: 60px;
   font-size: 30px;
 }
+
+.card-element{
+  cursor: pointer;
+}
+
+.overlay{
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.modal-window{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close-btn{
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.close-btn-img{
+  display: block;
+  width: 20px;
+  height: 20px;
+}

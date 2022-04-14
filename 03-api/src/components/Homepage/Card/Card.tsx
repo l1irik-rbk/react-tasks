@@ -3,11 +3,17 @@ import { CardProp } from '../../../helpers/TypeScript/types';
 
 class Card extends React.Component<CardProp> {
   render() {
-    const { name, birth_year: birthYear, mass, height, gender } = this.props.person;
+    const { person, showModalWindow } = this.props;
+    const { name, birth_year: birthYear, mass, height, gender } = person;
 
     return (
       <div className="col" data-testid="house">
-        <div className="card shadow p-3 mb-5 bg-white rounded">
+        <div
+          className="card shadow p-3 mb-5 bg-white rounded card-element"
+          onClick={() => {
+            showModalWindow(person);
+          }}
+        >
           <div className="card-body">
             <h5 className="card-title person-name">{name}</h5>
             <ul>
@@ -26,9 +32,6 @@ class Card extends React.Component<CardProp> {
               </li>
             </ul>
           </div>
-          {/* <div className="card-footer">
-            <small className="text-muted">Birth year: {birthYear}</small>
-          </div> */}
         </div>
       </div>
     );
