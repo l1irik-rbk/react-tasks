@@ -4,7 +4,7 @@ import { ModalWindowProp } from '../../../helpers/TypeScript/types';
 class ModalWindow extends React.Component<ModalWindowProp, object> {
   render() {
     const { closeModalWindow, person } = this.props;
-    if (!person) return;
+    if (!person) return null;
 
     const {
       name,
@@ -23,8 +23,9 @@ class ModalWindow extends React.Component<ModalWindowProp, object> {
           <div
             className="card shadow p-3 mb-5 bg-white rounded"
             onClick={(e) => e.stopPropagation()}
+            data-testid="cardWindow"
           >
-            <div className="close-btn" onClick={closeModalWindow}>
+            <div className="close-btn" onClick={closeModalWindow} data-testid="closeBtn">
               <img
                 className="close-btn-img"
                 src={`https://cdn-icons-png.flaticon.com/512/17/17047.png`}

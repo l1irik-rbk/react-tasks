@@ -89,13 +89,13 @@ class Homepage extends React.Component<object, HomepageState> {
           <Search onInputChange={this.onInputChange} searchValue={this.state.searchValue} />
         </form>
         {!isLoaded ? (
-          <Spinner />
+          <Spinner data-testid="spinner" />
         ) : (
           <CardsList people={people} showModalWindow={this.showModalWindow} />
         )}
         {personNotFound ? <NotFound /> : null}
         {modalWindowActive ? (
-          <Modal>
+          <Modal data-testid="homeModalWindow">
             <ModalWindow person={madalWindowPerson} closeModalWindow={this.closeModalWindow} />
           </Modal>
         ) : null}

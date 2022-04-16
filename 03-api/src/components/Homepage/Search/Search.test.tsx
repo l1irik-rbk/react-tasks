@@ -4,12 +4,13 @@ import Search from './Search';
 
 describe('Input component', () => {
   test('render input', () => {
-    // render(<Search />);
-    // const input = screen.getByPlaceholderText(/what're you searching for/i);
-    // expect(input).toBeInTheDocument();
-    // fireEvent.change(input, {
-    //   target: { value: 'Something' },
-    // });
+    const onInputChange = jest.fn();
+    render(<Search searchValue="Something" onInputChange={onInputChange} />);
+    const input = screen.getByPlaceholderText(/you need to type name of hero/i);
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, {
+      target: { value: 'New value' },
+    });
   });
 });
 

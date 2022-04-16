@@ -1,12 +1,16 @@
 export interface IPerson {
-  birth_year: string;
-  eye_color: string;
+  birth_year?: string;
+  eye_color?: string;
   gender: string;
-  hair_color: string;
+  hair_color?: string;
   height: string;
   mass: number;
   name: string;
-  skin_color: string;
+  skin_color?: string;
+  birthYear?: string;
+  eyeColor?: string;
+  hairColor?: string;
+  skinColor?: string;
 }
 
 // birth_year: "19BBY"

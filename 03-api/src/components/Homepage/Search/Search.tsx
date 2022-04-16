@@ -22,7 +22,7 @@ class Search extends React.Component<SearchProp, object> {
         <div className="input-group mb-4">
           <input
             type="search"
-            placeholder="What're you searching for?"
+            placeholder="You need to type name of hero from star wars films. Luke, R2 and etc... "
             aria-describedby="button-addon5"
             className="form-control"
             value={this.props.searchValue}

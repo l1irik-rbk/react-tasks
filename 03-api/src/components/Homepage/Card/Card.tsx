@@ -13,6 +13,7 @@ class Card extends React.Component<CardProp> {
           onClick={() => {
             showModalWindow(person);
           }}
+          data-testid="personCard"
         >
           <div className="card-body">
             <h5 className="card-title person-name">{name}</h5>
