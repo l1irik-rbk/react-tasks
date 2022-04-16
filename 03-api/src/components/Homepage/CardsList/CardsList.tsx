@@ -8,7 +8,7 @@ class CardsList extends React.Component<CardListProp, object> {
 
     return (
       <div className="row row-cols-1 row-cols-md-3 g-4">
-        {people.map((person) => {
+        {people?.map((person) => {
           return <Card key={person.name} person={person} showModalWindow={showModalWindow} />;
         })}
       </div>

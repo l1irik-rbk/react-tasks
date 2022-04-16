@@ -4,7 +4,7 @@ import './Spinner.css';
 class Spinner extends React.Component<object, object> {
   render() {
     return (
-      <div className="loadingio-spinner-rolling-741cvvqjpyq spinner">
+      <div className="loadingio-spinner-rolling-741cvvqjpyq spinner" data-testid="spinner">
         <div className="ldio-j7cbdvt2cy">
           <div></div>
         </div>

@@ -11,6 +11,7 @@ import Search from '../Search/Search';
 
 class Homepage extends React.Component<object, HomepageState> {
   ApiCall = new ApiCall();
+  _isMounted = false;
 
   constructor(props: object) {
     super(props);
@@ -26,13 +27,21 @@ class Homepage extends React.Component<object, HomepageState> {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     this.ApiCall.getAllPeople().then((data) => {
-      this.setState({
-        people: data.results,
-        isLoaded: true,
-        disabled: false,
-      });
+      if (this._isMounted) {
+        this.setState({
+          people: data.results,
+          isLoaded: true,
+          disabled: false,
+        });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   onInputChange = (value: string) => {
@@ -89,7 +98,7 @@ class Homepage extends React.Component<object, HomepageState> {
           <Search onInputChange={this.onInputChange} searchValue={this.state.searchValue} />
         </form>
         {!isLoaded ? (
-          <Spinner data-testid="spinner" />
+          <Spinner />
         ) : (
           <CardsList people={people} showModalWindow={this.showModalWindow} />
         )}
