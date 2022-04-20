@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IPerson } from '../../../helpers/TypeScript/interfaces';
-import { HomepageState } from '../../../helpers/TypeScript/types';
 import ApiCall from '../../../services/ApiCall';
 import Spinner from '../../Spinner/Spinner';
 import CardsList from '../CardsList/CardsList';
@@ -9,108 +8,70 @@ import ModalWindow from '../ModalWindow/ModalWindow';
 import NotFound from '../NotFound/NotFound';
 import Search from '../Search/Search';
 
-class Homepage extends React.Component<object, HomepageState> {
-  ApiCall = new ApiCall();
-  _isMounted = false;
+const Homepage: React.FC = () => {
+  const API = new ApiCall();
+  const [people, setPeople] = useState<IPerson[]>([]);
+  const [searchValue, setSearchVlaue] = useState('');
+  const [isLoaded, setLoaded] = useState(false);
+  const [, setDisabled] = useState(true);
+  const [personNotFound, setNotFoundPerson] = useState(false);
+  const [modalWindowActive, setModalWindowActive] = useState(false);
+  const [madalWindowPerson, setMadalWindowPerson] = useState<null | IPerson>(null);
 
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      people: [],
-      searchValue: '',
-      isLoaded: false,
-      disabled: true,
-      personNotFound: false,
-      modalWindowActive: false,
-      madalWindowPerson: null,
-    };
-  }
-
-  componentDidMount() {
-    this._isMounted = true;
-
-    this.ApiCall.getAllPeople().then((data) => {
-      if (this._isMounted) {
-        this.setState({
-          people: data.results,
-          isLoaded: true,
-          disabled: false,
-        });
-      }
+  useEffect(() => {
+    API.getAllPeople().then((data) => {
+      setPeople(data.results);
+      setLoaded(true);
+      setDisabled(false);
     });
-  }
+  }, []);
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  onInputChange = (value: string) => {
-    this.setState({
-      searchValue: value,
-    });
+  const InputChange = (value: string) => {
+    setSearchVlaue(value);
   };
 
-  findNewItem = (e: React.FormEvent) => {
+  const findNewItem = (e: React.FormEvent) => {
     e.preventDefault();
 
-    this.setState({
-      isLoaded: false,
-      disabled: true,
-      personNotFound: false,
-    });
+    setLoaded(false);
+    setDisabled(true);
+    setNotFoundPerson(false);
 
-    const { searchValue } = this.state;
-
-    this.ApiCall.findPerson(searchValue).then((data) => {
+    API.findPerson(searchValue).then((data) => {
       const people: IPerson[] = data.results;
-
-      this.setState({
-        people,
-        searchValue: '',
-        isLoaded: true,
-        disabled: false,
-        personNotFound: !Boolean(people.length),
-      });
+      setPeople(people);
+      setSearchVlaue('');
+      setLoaded(true);
+      setDisabled(false);
+      setNotFoundPerson(!Boolean(people.length));
     });
   };
 
-  showModalWindow = (person: IPerson) => {
-    this.setState({
-      modalWindowActive: true,
-      madalWindowPerson: person,
-    });
+  const showModalWindow = (person: IPerson) => {
+    setModalWindowActive(true);
+    setMadalWindowPerson(person);
   };
 
-  closeModalWindow = () => {
-    this.setState({
-      modalWindowActive: false,
-      madalWindowPerson: null,
-    });
+  const closeModalWindow = () => {
+    setModalWindowActive(false);
+    setMadalWindowPerson(null);
   };
 
-  render() {
-    const { people, isLoaded, personNotFound, modalWindowActive, madalWindowPerson } = this.state;
-
-    return (
-      <section className="home-page" data-testid="home-page">
-        <h1 className="main-title">Star wars heroes</h1>
-        <form onSubmit={this.findNewItem}>
-          <Search onInputChange={this.onInputChange} searchValue={this.state.searchValue} />
-        </form>
-        {!isLoaded ? (
-          <Spinner />
-        ) : (
-          <CardsList people={people} showModalWindow={this.showModalWindow} />
-        )}
-        {personNotFound ? <NotFound /> : null}
-        {modalWindowActive ? (
-          <Modal data-testid="homeModalWindow">
-            <ModalWindow person={madalWindowPerson} closeModalWindow={this.closeModalWindow} />
-          </Modal>
-        ) : null}
-      </section>
-    );
-  }
-}
+  return (
+    <section className="home-page" data-testid="home-page">
+      <h1 className="main-title">Star wars heroes</h1>
+      <form onSubmit={findNewItem}>
+        <Search onInputChange={InputChange} searchValue={searchValue} />
+      </form>
+      {!isLoaded ? <Spinner /> : <CardsList people={people} showModalWindow={showModalWindow} />}
+      {personNotFound ? <NotFound /> : null}
+      {modalWindowActive ? (
+        <Modal data-testid="homeModalWindow">
+          <ModalWindow person={madalWindowPerson} closeModalWindow={closeModalWindow} />
+        </Modal>
+      ) : null}
+    </section>
+  );
+};
 
 export default Homepage;

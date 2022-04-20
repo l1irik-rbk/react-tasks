@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchButton = () => {
+const SearchButton: React.FC = () => {
   return (
     <div className="input-group-append">
       <button id="button-addon5" type="submit" className="btn btn-primary">

@@ -7,20 +7,18 @@ import Formpage from '../Formpage/Page/Formpage';
 import Homepage from '../Homepage/Page/Homepage';
 import Layout from '../Layout/Layout';
 
-class App extends React.Component<object, object> {
-  render() {
-    return (
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Homepage />} />
-          <Route path="AboutUs" element={<Aboutpage />} />
-          <Route path="Form" element={<Formpage />} />
-          <Route path="/404" element={<Errorpage />} />
-          <Route path="*" element={<Navigate to="/404" />} />
-        </Route>
-      </Routes>
-    );
-  }
-}
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Homepage />} />
+        <Route path="AboutUs" element={<Aboutpage />} />
+        <Route path="Form" element={<Formpage />} />
+        <Route path="/404" element={<Errorpage />} />
+        <Route path="*" element={<Navigate to="/404" />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default App;
