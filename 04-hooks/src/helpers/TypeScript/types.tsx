@@ -34,7 +34,7 @@ export type FormState = {
 };
 
 export type ValidationErrorProps = {
-  errorMessage: string;
+  errorMessage: string | undefined;
 };
 
 export type CardListProp = {
@@ -50,4 +50,14 @@ export type SearchProp = {
 export type ModalWindowProp = {
   closeModalWindow: () => void;
   person: IPerson | null;
+};
+
+export type formProps = {
+  firstName: string;
+  lastName: string;
+  birthday: string;
+  country: string;
+  notification: boolean;
+  picture: FileList;
+  accept: boolean;
 };

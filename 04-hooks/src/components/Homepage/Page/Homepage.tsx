@@ -24,6 +24,10 @@ const Homepage: React.FC = () => {
       setLoaded(true);
       setDisabled(false);
     });
+
+    return () => {
+      setPeople([]);
+    };
   }, []);
 
   const InputChange = (value: string) => {

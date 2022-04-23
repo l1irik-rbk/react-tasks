@@ -1,4 +1,4 @@
-import { rest, setupWorker } from 'msw';
+import { rest } from 'msw';
 
 export const handlers = [
   rest.get(`https://swapi.dev/api/people`, (req, res, ctx) => {

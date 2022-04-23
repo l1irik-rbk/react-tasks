@@ -17,19 +17,13 @@ describe('Form component', () => {
     expect(button.disabled).toBeTruthy();
   });
 
-  test('Enable button on input change', () => {
+  test('Show an error', () => {
     render(<Form />);
-    userEvent.type(screen.getByTestId('firstName'), 'hello world');
-    expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBeFalsy();
+    userEvent.type(screen.getByTestId('firstName'), '1a');
+    expect(screen.getByTestId('error-message')).toBeInTheDocument();
   });
 
-  test('Enable button on input change', () => {
-    render(<Form />);
-    userEvent.type(screen.getByTestId('firstName'), 'hello world');
-    expect((screen.getByRole('button') as HTMLButtonElement).disabled).toBeFalsy();
-  });
-
-  test('Render new card on submit', () => {
+  test('Render new card on submit', async () => {
     render(<Form />);
 
     global.URL.createObjectURL = jest.fn();
@@ -44,8 +38,8 @@ describe('Form component', () => {
     const pictureInput = screen.getByTestId('picture') as HTMLInputElement;
     const fakeFile = new File(['(⌐□_□)'], 'chucknorris.jpg', { type: 'image/jpeg' });
 
-    userEvent.type(firstNameInput, 'First Name');
-    userEvent.type(lastNameInput, 'Last Name');
+    userEvent.type(firstNameInput, 'asds');
+    userEvent.type(lastNameInput, 'asd');
     userEvent.type(birthdayNameInput, '2022-04-01');
     userEvent.type(countryOption, 'Russia');
     userEvent.upload(pictureInput, fakeFile);
@@ -54,7 +48,7 @@ describe('Form component', () => {
     expect(acceptInput.checked).toEqual(true);
 
     fireEvent.click(button);
-    expect(button.disabled).toBeTruthy();
+    expect(button).toHaveBeenCalledTimes(1);
   });
 
   test('asd', () => {

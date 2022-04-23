@@ -23,9 +23,10 @@ export interface newCard {
   birthday: string;
   country: string;
   notification: boolean;
-  picture?: string;
+  picture?: FileList;
   accept: boolean;
-  id: number;
+  id?: number;
+  newPicture?: string;
 }
 
 export interface Errors {

@@ -3,7 +3,7 @@ import { TEST_CARD } from '../../../helpers/constants';
 import NewCard from './NewCard';
 
 test('Card state test', () => {
-  render(<NewCard card={TEST_CARD} />);
+  render(<NewCard {...TEST_CARD} />);
   const img = screen.getByRole('img');
   expect(img).toBeInTheDocument();
   expect(img).toHaveProperty('src');
