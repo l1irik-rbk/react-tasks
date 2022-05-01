@@ -1,16 +1,20 @@
 import { ERROR_MESSAGES, REG_EXP } from '../../../helpers/constants';
 import { newCard } from '../../../helpers/TypeScript/interfaces';
-import { FormpageProps, formProps } from '../../../helpers/TypeScript/types';
+import { formProps } from '../../../helpers/TypeScript/types';
 import { useForm } from 'react-hook-form';
 import ValidationError from '../ValidationError/ValidationError';
+import { ActionKind, AppContext } from '../../../context/AppContext';
+import { useContext } from 'react';
 
-const Form = ({ addCard }: FormpageProps) => {
+const Form = () => {
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
     reset,
   } = useForm<formProps>({ mode: 'onBlur' });
+
+  const { dispatch } = useContext(AppContext);
 
   const onSubmit = (data: formProps) => {
     const { firstName, lastName, birthday, country, notification, accept, picture }: newCard = data;
@@ -27,7 +31,12 @@ const Form = ({ addCard }: FormpageProps) => {
       accept,
       id: Date.now(),
     };
-    if (addCard) addCard(card);
+
+    dispatch({
+      type: ActionKind.ADD_CARD,
+      payload: card,
+    });
+
     reset();
   };
 

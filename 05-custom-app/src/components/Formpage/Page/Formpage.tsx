@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import { newCard } from '../../../helpers/TypeScript/interfaces';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../context/AppContext';
 import Form from '../Form/Form';
 import NewCard from '../NewCard/NewCard';
 
 const Formpage = () => {
-  const [cards, setCards] = useState<newCard[]>([]);
-
-  const addCard = (newCard: newCard) => {
-    setCards([...cards, newCard]);
-  };
+  const { state } = useContext(AppContext);
 
   return (
     <section className="form-section">
       <h1 className="main-title">Information about you</h1>
-      <Form addCard={addCard} />
+      <Form />
       <div className="row row-cols-1 row-cols-md-2 g-4">
-        {cards.map((card) => {
+        {state.cards.map((card) => {
           return <NewCard key={card.id} {...card} />;
         })}
       </div>

@@ -4,13 +4,17 @@ export interface IPerson {
   gender: string;
   hair_color?: string;
   height: string;
-  mass: number;
+  mass: string;
   name: string;
   skin_color?: string;
   birthYear?: string;
   eyeColor?: string;
   hairColor?: string;
   skinColor?: string;
+}
+
+export interface NewPerson {
+  [key: string]: string;
 }
 
 export interface fakeStore {

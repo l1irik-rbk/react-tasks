@@ -8,6 +8,10 @@ export default class ApiCall {
     return await this.getResource(`people`);
   };
 
+  getAllPeopleOnPage = async (pageNumber = 1) => {
+    return await this.getResource(`people/?page=${pageNumber}`);
+  };
+
   findPerson = async (name: string) => {
     return await this.getResource(`people/?search=${name}`);
   };

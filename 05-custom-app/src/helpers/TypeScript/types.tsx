@@ -1,13 +1,13 @@
-import { IPerson, newCard, Errors } from './interfaces';
+import { newCard, Errors, NewPerson } from './interfaces';
 
 export type HomepageState = {
-  people: IPerson[];
+  people: NewPerson[];
   searchValue: string;
   isLoaded: boolean;
   disabled: boolean;
   personNotFound: boolean;
   modalWindowActive: boolean;
-  madalWindowPerson: null | IPerson;
+  madalWindowPerson: null | NewPerson;
 };
 
 export type FormpageState = {
@@ -19,8 +19,8 @@ export type FormpageProps = {
 };
 
 export type CardProp = {
-  person: IPerson;
-  showModalWindow: (person: IPerson) => void;
+  person: NewPerson;
+  showModalWindow: (person: NewPerson) => void;
 };
 
 export type NewCardProp = {
@@ -38,8 +38,8 @@ export type ValidationErrorProps = {
 };
 
 export type CardListProp = {
-  people: IPerson[];
-  showModalWindow: (person: IPerson) => void;
+  people: NewPerson[];
+  showModalWindow: (person: NewPerson) => void;
 };
 
 export type SearchProp = {
@@ -49,7 +49,7 @@ export type SearchProp = {
 
 export type ModalWindowProp = {
   closeModalWindow: () => void;
-  person: IPerson | null;
+  person: NewPerson | null;
 };
 
 export type formProps = {
@@ -60,4 +60,16 @@ export type formProps = {
   notification: boolean;
   picture: FileList;
   accept: boolean;
+};
+
+export type PaginationBtnsProps = {
+  page: number;
+  currentPage: number;
+  disabled: boolean;
+  changePage: (page: number) => void;
+};
+
+export type SelectFieldProps = {
+  sortValue: string;
+  changeSortValue: (value: string) => void;
 };

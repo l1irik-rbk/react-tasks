@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
+import { AppContext, appReducer, initialState } from './context/AppContext';
 import './styles/style.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const Main = () => {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+  // state: initialStateType, action: actionType)
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <AppContext.Provider value={{ state, dispatch }}>
+          <App />
+        </AppContext.Provider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<Main />, document.getElementById('root'));

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { IPerson } from '../../../helpers/TypeScript/interfaces';
+import { NewPerson } from '../../../helpers/TypeScript/interfaces';
 import ModalWindow from './ModalWindow';
 
 describe('ModalWindow', () => {
-  const fakePerson: IPerson | null = {
+  const fakePerson: NewPerson | null = {
     name: 'Luke',
     birthYear: '112BBY',
-    mass: 45,
+    mass: '45',
     height: '148',
     gender: 'male',
     eyeColor: 'blue',
