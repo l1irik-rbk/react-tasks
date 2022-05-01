@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ActionKind, AppContext } from '../../../context/AppContext';
+import { AppContext } from '../../../context/AppContext';
+import { getSlicedArray } from '../../../helpers/getAllPeople';
 import { getPagesArray } from '../../../helpers/getPaginationBtns';
 import { sortPeople } from '../../../helpers/sortPeople';
-import { NewPerson } from '../../../helpers/TypeScript/interfaces';
+import { ActionKind, NewPerson } from '../../../helpers/TypeScript/interfaces';
 import ApiCall from '../../../services/ApiCall';
 import Spinner from '../../Spinner/Spinner';
 import CardsList from '../CardsList/CardsList';
@@ -10,64 +11,76 @@ import Modal from '../Modal/Modal';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import NotFound from '../NotFound/NotFound';
 import PaginationBtns from '../PaginationBtns/PaginationBtns';
+import PaginationSort from '../PaginationBtns/PaginationSort';
 import Search from '../Search/Search';
 import SelectField from '../SelectField/SelectValue';
 
 const Homepage: React.FC = () => {
   const API = new ApiCall();
-  // const [people, setPeople] = useState<NewPerson[]>([]);
-  const [searchValue, setSearchVlaue] = useState('');
   const [isLoaded, setLoaded] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const [personNotFound, setNotFoundPerson] = useState(false);
   const [modalWindowActive, setModalWindowActive] = useState(false);
   const [madalWindowPerson, setMadalWindowPerson] = useState<null | NewPerson>(null);
 
-  const [totalPeople, setTotalPeople] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pagination, setPagination] = useState(true);
-  const [sortValue, setSortValue] = useState('');
-  const [sortedField, setSortedField] = useState(false);
-
-  const pagesArray = getPagesArray(totalPeople);
-
   const { state, dispatch } = useContext(AppContext);
-  const { people } = state;
+  const {
+    people,
+    sortValue,
+    paginationSortValue,
+    paginatiionBtns,
+    peopleLoaded,
+    searchValue,
+    pageNumber,
+    totalPeople,
+  } = state;
 
   useEffect(() => {
-    if (people.length) {
+    if (peopleLoaded) {
       setLoaded(true);
       return;
     }
-    fetchPeople();
-  }, [currentPage, sortValue]);
 
-  const fetchPeople = () => {
+    fetchPeople();
+  }, [pageNumber, sortValue, paginationSortValue]);
+
+  const fetchPeople = async () => {
     setLoaded(false);
-    setDisabled(true);
     setNotFoundPerson(false);
 
-    API.findPerson(searchValue).then((data) => {
-      const people: NewPerson[] = data.results;
-      dispatch({
-        type: ActionKind.FIND_PEOPLE,
-        payload: people,
-      });
-      setSearchVlaue('');
-      setLoaded(true);
-      setDisabled(false);
-      setNotFoundPerson(!Boolean(people.length));
-      if (!searchValue) setCurrentPage(1);
-    });
+    let people: NewPerson[];
+    let sortedArray: NewPerson[] | undefined;
+    let paginatiionBtns: number[] | undefined;
+
+    if (paginationSortValue === 10) {
+      const data = await API.findPerson(searchValue, pageNumber);
+      people = data.results;
+      sortedArray = sortPeople(people, sortValue);
+      dispatch({ type: ActionKind.TOTAL_PEOPLE, payload: data.count });
+      paginatiionBtns = getPagesArray(data.count, paginationSortValue);
+    }
+
+    if (paginationSortValue === 15 || paginationSortValue === 5) {
+      const allPeople = await getSlicedArray(paginationSortValue, totalPeople, searchValue);
+      people = allPeople[pageNumber - 1];
+      sortedArray = sortPeople(people, sortValue);
+      paginatiionBtns = getPagesArray(totalPeople, paginationSortValue);
+    }
+
+    dispatch({ type: ActionKind.ADD_PAGINATION_BTNS, payload: paginatiionBtns });
+    dispatch({ type: ActionKind.FIND_PEOPLE, payload: sortedArray });
+    dispatch({ type: ActionKind.SEARCH, payload: searchValue });
+    setLoaded(true);
+    dispatch({ type: ActionKind.PEOPLE_LOADED, payload: true });
   };
 
   const InputChange = (value: string) => {
-    setSearchVlaue(value);
+    dispatch({ type: ActionKind.SEARCH, payload: value });
   };
 
   const findNewItem = (e: React.FormEvent) => {
     e.preventDefault();
     fetchPeople();
+    dispatch({ type: ActionKind.PAGE_NUMBER, payload: 1 });
   };
 
   const showModalWindow = (person: NewPerson) => {
@@ -81,11 +94,19 @@ const Homepage: React.FC = () => {
   };
 
   const changePage = (page: number) => {
-    setCurrentPage(page);
+    dispatch({ type: ActionKind.PEOPLE_LOADED, payload: false });
+    dispatch({ type: ActionKind.PAGE_NUMBER, payload: page });
   };
 
   const changeSortValue = (value: string) => {
-    setSortValue(value);
+    dispatch({ type: ActionKind.PEOPLE_LOADED, payload: false });
+    dispatch({ type: ActionKind.SORT_PEOPLE, payload: value });
+  };
+
+  const changePaginationValue = (value: number) => {
+    dispatch({ type: ActionKind.PEOPLE_LOADED, payload: false });
+    dispatch({ type: ActionKind.SORT_PAGINATION, payload: value });
+    dispatch({ type: ActionKind.PAGE_NUMBER, payload: 1 });
   };
 
   return (
@@ -94,23 +115,33 @@ const Homepage: React.FC = () => {
       <form onSubmit={findNewItem}>
         <Search onInputChange={InputChange} searchValue={searchValue} />
       </form>
-      <div className="row align-items-start">
-        {/* <div className="col">
-          <ul className="pagination pagination-menu">
-            {pagesArray.map((page) => (
-              <PaginationBtns
-                key={page}
-                page={page}
-                currentPage={currentPage}
-                disabled={disabled}
-                changePage={changePage}
-              />
-            ))}
-          </ul>
-        </div> */}
-      </div>
-      <SelectField changeSortValue={changeSortValue} sortValue={sortValue} />
-      {!isLoaded ? <Spinner /> : <CardsList people={people} showModalWindow={showModalWindow} />}
+      {!isLoaded ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="row align-items-start">
+            <div className="col">
+              <ul className="pagination pagination-menu">
+                {paginatiionBtns.map((page) => (
+                  <PaginationBtns
+                    key={page}
+                    page={page}
+                    currentPage={pageNumber}
+                    disabled={false}
+                    changePage={changePage}
+                  />
+                ))}
+              </ul>
+            </div>
+            <PaginationSort
+              changePaginationValue={changePaginationValue}
+              paginationSortValue={paginationSortValue}
+            />
+          </div>
+          <SelectField changeSortValue={changeSortValue} sortValue={sortValue} />
+          <CardsList people={people} showModalWindow={showModalWindow} />
+        </>
+      )}
       {personNotFound ? <NotFound /> : null}
       {modalWindowActive ? (
         <Modal data-testid="homeModalWindow">

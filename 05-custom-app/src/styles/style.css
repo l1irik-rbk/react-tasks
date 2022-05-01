@@ -89,6 +89,7 @@ form{
   height: 20px;
 }
 
-.people-select{
+.people-select,
+.pagination-select{
   margin-bottom: 20px;
 }

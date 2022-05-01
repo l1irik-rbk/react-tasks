@@ -7,7 +7,7 @@ import './styles/style.css';
 
 const Main = () => {
   const [state, dispatch] = useReducer(appReducer, initialState);
-  // state: initialStateType, action: actionType)
+
   return (
     <React.StrictMode>
       <BrowserRouter>

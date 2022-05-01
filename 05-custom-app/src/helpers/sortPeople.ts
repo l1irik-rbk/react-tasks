@@ -1,6 +1,7 @@
 import { NewPerson } from './TypeScript/interfaces';
 
 export const sortPeople = (people: NewPerson[], sortType: string) => {
+  if (!sortType) return people;
   let newArr;
 
   if (sortType === 'name') {

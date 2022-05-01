@@ -73,3 +73,8 @@ export type SelectFieldProps = {
   sortValue: string;
   changeSortValue: (value: string) => void;
 };
+
+export type SelectPaginationProps = {
+  paginationSortValue: number;
+  changePaginationValue: (value: number) => void;
+};

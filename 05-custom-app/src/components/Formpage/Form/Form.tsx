@@ -1,9 +1,9 @@
 import { ERROR_MESSAGES, REG_EXP } from '../../../helpers/constants';
-import { newCard } from '../../../helpers/TypeScript/interfaces';
+import { ActionKind, newCard } from '../../../helpers/TypeScript/interfaces';
 import { formProps } from '../../../helpers/TypeScript/types';
 import { useForm } from 'react-hook-form';
 import ValidationError from '../ValidationError/ValidationError';
-import { ActionKind, AppContext } from '../../../context/AppContext';
+import { AppContext } from '../../../context/AppContext';
 import { useContext } from 'react';
 
 const Form = () => {

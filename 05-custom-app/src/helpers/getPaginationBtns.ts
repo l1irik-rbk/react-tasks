@@ -1,10 +1,10 @@
-export const getPagesArray = (totalPeople: number) => {
+export const getPagesArray = (totalPeople: number, peopleCount: number) => {
   const pagesArray = [];
-  const peoplePerPage = 10;
-  const totalPages = Math.ceil(totalPeople / peoplePerPage);
+  const totalPages = Math.ceil(totalPeople / peopleCount);
 
   for (let i = 0; i < totalPages; i++) {
     pagesArray.push(i + 1);
   }
+
   return pagesArray;
 };

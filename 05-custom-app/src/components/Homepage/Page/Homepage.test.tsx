@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import Homepage from './Homepage';
 
 describe('homepage', () => {
-  // test('render home page', () => {
-  //   render(<Homepage />);
-  //   expect(screen.getByText(/star wars heroes/i)).toBeInTheDocument();
-  //   expect(screen.getByTestId('spinner')).toBeInTheDocument();
-  // });
+  test('render home page', () => {
+    // render(<Homepage />);
+    // expect(screen.getByText(/star wars heroes/i)).toBeInTheDocument();
+    // expect(screen.getByTestId('spinner')).toBeInTheDocument();
+  });
   // test('fetch and display people', async () => {
   //   const { findByText } = render(<Homepage />);
   //   await waitForElementToBeRemoved(screen.getByTestId('spinner'));

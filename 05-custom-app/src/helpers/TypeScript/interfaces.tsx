@@ -41,3 +41,37 @@ export interface Errors {
   pictureError?: boolean;
   birthdayError?: boolean;
 }
+
+export interface initialStateType {
+  cards: newCard[];
+  people: NewPerson[];
+  sortValue: string;
+  paginationSortValue: number;
+  paginatiionBtns: number[];
+  peopleLoaded: boolean;
+  searchValue: string;
+  pageNumber: number;
+  totalPeople: number;
+}
+
+export interface actionType {
+  type: ActionKind;
+  payload: NewPerson[] | newCard | string | number | number[] | boolean | undefined;
+}
+
+export interface ContextType {
+  state: initialStateType;
+  dispatch: React.Dispatch<actionType>;
+}
+
+export enum ActionKind {
+  ADD_CARD = 'ADD_CARD',
+  FIND_PEOPLE = 'FIND_PEOPLE',
+  SORT_PEOPLE = 'SORT_PEOPLE',
+  SORT_PAGINATION = 'SORT_PAGINATION',
+  ADD_PAGINATION_BTNS = 'ADD_PAGINATION_BTNS',
+  PEOPLE_LOADED = 'IS_LOADED',
+  SEARCH = 'SEARCH',
+  PAGE_NUMBER = 'PAGE_NUMBER',
+  TOTAL_PEOPLE = 'TOTAL_PEOPLE',
+}
