@@ -7,8 +7,6 @@ import { ActionKind, NewPerson } from '../../../helpers/TypeScript/interfaces';
 import ApiCall from '../../../services/ApiCall';
 import Spinner from '../../Spinner/Spinner';
 import CardsList from '../CardsList/CardsList';
-import Modal from '../Modal/Modal';
-import ModalWindow from '../ModalWindow/ModalWindow';
 import NotFound from '../NotFound/NotFound';
 import PaginationBtns from '../PaginationBtns/PaginationBtns';
 import PaginationSort from '../PaginationBtns/PaginationSort';
@@ -19,8 +17,6 @@ const Homepage: React.FC = () => {
   const API = new ApiCall();
   const [isLoaded, setLoaded] = useState(false);
   const [personNotFound, setNotFoundPerson] = useState(false);
-  const [modalWindowActive, setModalWindowActive] = useState(false);
-  const [madalWindowPerson, setMadalWindowPerson] = useState<null | NewPerson>(null);
 
   const { state, dispatch } = useContext(AppContext);
   const {
@@ -83,16 +79,6 @@ const Homepage: React.FC = () => {
     dispatch({ type: ActionKind.PAGE_NUMBER, payload: 1 });
   };
 
-  const showModalWindow = (person: NewPerson) => {
-    setModalWindowActive(true);
-    setMadalWindowPerson(person);
-  };
-
-  const closeModalWindow = () => {
-    setModalWindowActive(false);
-    setMadalWindowPerson(null);
-  };
-
   const changePage = (page: number) => {
     dispatch({ type: ActionKind.PEOPLE_LOADED, payload: false });
     dispatch({ type: ActionKind.PAGE_NUMBER, payload: page });
@@ -139,15 +125,10 @@ const Homepage: React.FC = () => {
             />
           </div>
           <SelectField changeSortValue={changeSortValue} sortValue={sortValue} />
-          <CardsList people={people} showModalWindow={showModalWindow} />
+          <CardsList people={people} />
         </>
       )}
       {personNotFound ? <NotFound /> : null}
-      {modalWindowActive ? (
-        <Modal data-testid="homeModalWindow">
-          <ModalWindow person={madalWindowPerson} closeModalWindow={closeModalWindow} />
-        </Modal>
-      ) : null}
     </section>
   );
 };

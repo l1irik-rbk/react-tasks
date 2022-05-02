@@ -18,6 +18,7 @@ export const initialState: initialStateType = {
   searchValue: '',
   pageNumber: 1,
   totalPeople: 0,
+  clickedPersonName: '',
 };
 
 export const AppContext = createContext<ContextType>({
@@ -46,6 +47,8 @@ export const appReducer = (state: initialStateType, action: actionType): initial
       return { ...state, pageNumber: payload as number };
     case ActionKind.TOTAL_PEOPLE:
       return { ...state, totalPeople: payload as number };
+    case ActionKind.PERSON:
+      return { ...state, clickedPersonName: payload as string };
     default:
       return state;
   }

@@ -52,6 +52,7 @@ export interface initialStateType {
   searchValue: string;
   pageNumber: number;
   totalPeople: number;
+  clickedPersonName: string;
 }
 
 export interface actionType {
@@ -74,4 +75,5 @@ export enum ActionKind {
   SEARCH = 'SEARCH',
   PAGE_NUMBER = 'PAGE_NUMBER',
   TOTAL_PEOPLE = 'TOTAL_PEOPLE',
+  PERSON = 'PERSON',
 }

@@ -6,6 +6,7 @@ import Aboutpage from '../Aboutpage/Aboutpage';
 import Formpage from '../Formpage/Page/Formpage';
 import Homepage from '../Homepage/Page/Homepage';
 import Layout from '../Layout/Layout';
+import Personpage from '../Personpage/Personpage';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="AboutUs" element={<Aboutpage />} />
         <Route path="Form" element={<Formpage />} />
         <Route path="/404" element={<Errorpage />} />
+        <Route path="/people/:id" element={<Personpage />} />
         <Route path="*" element={<Navigate to="/404" />} />
       </Route>
     </Routes>

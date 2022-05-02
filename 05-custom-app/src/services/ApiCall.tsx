@@ -15,4 +15,6 @@ export default class ApiCall {
   findPerson = async (name: string, pageNumber = 1) => {
     return await this.getResource(`people/?search=${name}&page=${pageNumber}`);
   };
+
+  modificatedPerson = () => {};
 }

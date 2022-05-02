@@ -20,7 +20,7 @@ export type FormpageProps = {
 
 export type CardProp = {
   person: NewPerson;
-  showModalWindow: (person: NewPerson) => void;
+  showModalWindow?: (person: NewPerson) => void;
 };
 
 export type NewCardProp = {
@@ -39,7 +39,7 @@ export type ValidationErrorProps = {
 
 export type CardListProp = {
   people: NewPerson[];
-  showModalWindow: (person: NewPerson) => void;
+  showModalWindow?: (person: NewPerson) => void;
 };
 
 export type SearchProp = {
