@@ -1,10 +1,11 @@
 import { ERROR_MESSAGES, REG_EXP } from '../../../helpers/constants';
-import { ActionKind, newCard } from '../../../helpers/TypeScript/interfaces';
+import { newCard } from '../../../helpers/TypeScript/interfaces';
 import { formProps } from '../../../helpers/TypeScript/types';
 import { useForm } from 'react-hook-form';
 import ValidationError from '../ValidationError/ValidationError';
-import { AppContext } from '../../../context/AppContext';
-import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import { appSlice } from '../../../toolkitRedux/toolkitSlice';
+import { AppDispatch } from '../../../toolkitRedux/store';
 
 const Form = () => {
   const {
@@ -14,7 +15,8 @@ const Form = () => {
     reset,
   } = useForm<formProps>({ mode: 'onBlur' });
 
-  const { dispatch } = useContext(AppContext);
+  const dispatch = useDispatch<AppDispatch>();
+  const { setCard } = appSlice.actions;
 
   const onSubmit = (data: formProps) => {
     const { firstName, lastName, birthday, country, notification, accept, picture }: newCard = data;
@@ -31,11 +33,7 @@ const Form = () => {
       accept,
       id: Date.now(),
     };
-
-    dispatch({
-      type: ActionKind.ADD_CARD,
-      payload: card,
-    });
+    dispatch(setCard(card));
 
     reset();
   };

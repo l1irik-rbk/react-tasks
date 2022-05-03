@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../context/AppContext';
+import { useAppSelector } from '../../toolkitRedux/reduxHooks';
 
 const Personpage = () => {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
   const goHome = () => navigate('/');
-  const { state } = useContext(AppContext);
-  const { clickedPersonName, people } = state;
+
+  const { people, clickedPersonName } = useAppSelector((state) => state.appReducer);
   const person = people.filter((person) => person.name === clickedPersonName);
 
   if (!person.length) {

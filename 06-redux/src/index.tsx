@@ -1,19 +1,20 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
-import { AppContext, appReducer, initialState } from './context/AppContext';
 import './styles/style.css';
+import { setupStore } from './toolkitRedux/store';
+
+const store = setupStore();
 
 const Main = () => {
-  const [state, dispatch] = useReducer(appReducer, initialState);
-
   return (
     <React.StrictMode>
       <BrowserRouter>
-        <AppContext.Provider value={{ state, dispatch }}>
+        <Provider store={store}>
           <App />
-        </AppContext.Provider>
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>
   );

@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { AppContext } from '../../../context/AppContext';
-import { ActionKind } from '../../../helpers/TypeScript/interfaces';
 import { CardProp } from '../../../helpers/TypeScript/types';
+import { AppDispatch } from '../../../toolkitRedux/store';
+import { appSlice } from '../../../toolkitRedux/toolkitSlice';
 
 const Card = ({ person }: CardProp) => {
   const { name, birth_year: birthYear, mass, height, gender } = person;
-  const { dispatch } = useContext(AppContext);
+  const { setClickedPersonName } = appSlice.actions;
+  const dispatch = useDispatch<AppDispatch>();
+
   const handleClick = () => {
-    dispatch({ type: ActionKind.PERSON, payload: name });
+    dispatch(setClickedPersonName(name));
   };
 
   return (

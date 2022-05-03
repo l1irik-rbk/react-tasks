@@ -53,6 +53,8 @@ export interface initialStateType {
   pageNumber: number;
   totalPeople: number;
   clickedPersonName: string;
+  isLoaded: boolean;
+  personNotFound: boolean;
 }
 
 export interface actionType {
@@ -76,4 +78,12 @@ export enum ActionKind {
   PAGE_NUMBER = 'PAGE_NUMBER',
   TOTAL_PEOPLE = 'TOTAL_PEOPLE',
   PERSON = 'PERSON',
+}
+
+export interface FetchParams {
+  searchValue: string;
+  pageNumber: number;
+  paginationSortValue: number;
+  sortValue: string;
+  totalPeople: number;
 }
